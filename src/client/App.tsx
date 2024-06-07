@@ -1,14 +1,18 @@
 import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { createRoot } from 'react-dom/client';
-import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom';
 import Signin from './components/Signin';
+import Signup from './components/Signup';
 
-const App = () => {
+const App: React.FC = () => {
   return (
-    <div>
-      <Signin />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Signin />} />
+        <Route path="/signup" element={<Signup />} />
+      </Routes>
+    </Router>
   );
 };
 
-createRoot(document.querySelector('#root')).render(<App />);
+createRoot(document.querySelector('#root')!).render(<App />);
