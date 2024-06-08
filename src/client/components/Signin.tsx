@@ -19,7 +19,7 @@ function Copyright(props: any) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-      <Link color="inherit" href="http://localhost:8080/">
+      <Link color="inherit" href="https://github.com/oslabs-beta/RediWatch/tree/main">
         RediWatch
       </Link>{' '}
       {new Date().getFullYear()}
@@ -28,8 +28,12 @@ function Copyright(props: any) {
   );
 }
 
-// TODO remove, this demo shouldn't need to reset the theme.
-const defaultTheme = createTheme();
+// Set theme to dark mode always
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+  },
+});
 
 export default function SignInSide() {
   const navigate = useNavigate();
@@ -44,7 +48,7 @@ export default function SignInSide() {
   };
 
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <ThemeProvider theme={darkTheme}>
       <Grid container component="main" sx={{ height: '100vh' }}>
         <CssBaseline />
         <Grid

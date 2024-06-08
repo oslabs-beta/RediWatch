@@ -26,8 +26,8 @@ function Copyright(props: any) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
+      <Link color="inherit" href="https://github.com/oslabs-beta/RediWatch/tree/main">
+        RediWatch
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -85,8 +85,12 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
-// TODO remove, this demo shouldn't need to reset the theme.
-const defaultTheme = createTheme();
+// Set theme to dark mode always
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+  },
+});
 
 export default function Dashboard() {
   const [open, setOpen] = React.useState(true);
@@ -95,7 +99,7 @@ export default function Dashboard() {
   };
 
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <ThemeProvider theme={darkTheme}>
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
         <AppBar position="absolute" open={open}>
