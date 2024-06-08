@@ -170,7 +170,46 @@ export default function Dashboard() {
         >
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-         test
+          <Box
+              alignItems="center"
+              justifyContent="center"
+              sx={{
+                paddingTop: 5,
+                width: 500,
+                height: 400,
+                borderRadius: 1,
+                bgcolor: 'white',
+              }}
+            >
+              Create a New Connection
+              <br></br>
+              <FormGroup>
+                <TextField
+                  id="nick-name"
+                  label="Nickname"
+                  variant="outlined"
+                  //margin="normal"
+                  helperText="Create a nickname for this connection"
+                  style={{ width: 400 }}
+                />
+                <br></br>
+                <TextField
+                  id="database-string"
+                  label="Connection String"
+                  variant="outlined"
+                  // margin="normal"
+                  helperText="Enter Your Redis Connection String"
+                  style={{ width: 400 }}
+                />
+                <br></br>
+                <FormControlLabel
+                  control={<Checkbox defaultChecked />}
+                  label="Save Connection"
+                />
+                <br></br>
+                <Button variant="contained">Submit</Button>
+              </FormGroup>
+            </Box>
           </Container>
         </Box>
       </Box>
