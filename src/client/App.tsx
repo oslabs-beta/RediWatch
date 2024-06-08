@@ -1,5 +1,6 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
+import ConfigurationPage from './components/Configuration';
 
 
 const App = () => {
@@ -7,6 +8,7 @@ const App = () => {
     <>
       <div>
         <h1>Hello World!</h1>
+        <ConfigurationPage/>
       </div>
     </>
 
