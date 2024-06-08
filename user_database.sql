@@ -13,7 +13,7 @@ SET row_security = off;
 CREATE TABLE public.users (
 	"_id" serial NOT NULL,
     "email" varchar NOT NULL,
-    "password" varchar,
+    "password" varchar, NOT NULL,
 	"firstname" varchar NOT NULL,
 	"lastname" varchar NOT NULL,
 	"cache_id" bigint,
