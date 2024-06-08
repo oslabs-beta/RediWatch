@@ -19,7 +19,7 @@ function Copyright(props: any) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-      <Link color="inherit" href="http://localhost:8080/">
+      <Link color="inherit" href="https://github.com/oslabs-beta/RediWatch/tree/main">
         RediWatch
       </Link>{' '}
       {new Date().getFullYear()}
