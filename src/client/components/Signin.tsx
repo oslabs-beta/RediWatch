@@ -14,6 +14,8 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 
+import videoSrc from '../../assets/background.mp4';
+import imgSrc from '../../assets/RediWatch_logo.png';
 
 function Copyright(props: any) {
   return (
@@ -49,7 +51,7 @@ export default function SignInSide() {
 
   return (
     <ThemeProvider theme={darkTheme}>
-      <Grid container component="main" sx={{ height: '100vh' }}>
+      <Grid container component="main" sx={{ height: '100vh', position: 'relative' }}>
         <CssBaseline />
         <Grid
           item
@@ -57,14 +59,41 @@ export default function SignInSide() {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: 'url(https://source.unsplash.com/random?wallpapers)',
-            backgroundRepeat: 'no-repeat',
-            backgroundColor: (t) =>
-              t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
+            position: 'relative',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            overflow: 'hidden',
           }}
-        />
+        >
+          <video
+            autoPlay
+            loop
+            muted
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+            }}
+          >
+            <source src={videoSrc} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          <Box
+            component="img"
+            src={imgSrc}
+            alt="App Logo"
+            sx={{
+              position: 'absolute',
+              width: '50%',
+              maxWidth: '300px',
+              height: 'auto',
+            }}
+          />
+        </Grid>
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
           <Box
             sx={{
