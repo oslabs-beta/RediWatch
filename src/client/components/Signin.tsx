@@ -85,7 +85,7 @@ export default function SignInSide() {
           <Box
             component="img"
             src={imgSrc}
-            alt="App Logo"
+            alt="RediWatch logo"
             sx={{
               position: 'absolute',
               width: '50%',
