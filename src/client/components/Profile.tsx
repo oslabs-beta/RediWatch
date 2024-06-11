@@ -21,6 +21,7 @@ import { mainListItems, secondaryListItems } from './NavBar';
 import ConfigDropdown from './ConfigDropdown';
 import CurrentConfig from './CurrentConfig';
 import ConfigurationMethods from './ConfigurationMethods';
+import ConfigurationMethods1 from './ConfigurationMethods1';
 
 function Copyright(props: any) {
   return (
@@ -85,14 +86,14 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
+// TODO remove, this demo shouldn't need to reset the theme.
 // Set theme to dark mode always
 const darkTheme = createTheme({
   palette: {
     mode: 'dark',
   },
 });
-
-export default function Dashboard() {
+export default function Profile() {
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
@@ -127,7 +128,7 @@ export default function Dashboard() {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-               Profile
+              Profile
             </Typography>
             <IconButton color="inherit">
               <Badge badgeContent={4} color="secondary">
@@ -171,36 +172,10 @@ export default function Dashboard() {
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>
-              {/* Chart */}
-              <Grid item xs={12} md={8} lg={9}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    height: 240,
-                  }}
-                >
-                  <ConfigDropdown />
-                </Paper>
-              </Grid>
-              {/* Recent Deposits */}
-              <Grid item xs={12} md={4} lg={3}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    height: 240,
-                  }}
-                >
-                  <CurrentConfig/>
-                </Paper>
-              </Grid>
-              {/* Recent Orders */}
+              {/* Profiles */}
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  <ConfigurationMethods/>
+                  <ConfigurationMethods1/>
                 </Paper>
               </Grid>
             </Grid>
