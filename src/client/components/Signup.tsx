@@ -12,7 +12,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 
 function Copyright(props: any) {
   return (
@@ -35,6 +35,7 @@ const darkTheme = createTheme({
 });
 
 export default function SignUp() {
+  const navigate = useNavigate();
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -42,6 +43,7 @@ export default function SignUp() {
       email: data.get('email'),
       password: data.get('password'),
     });
+    navigate('/');
   };
 
   return (
