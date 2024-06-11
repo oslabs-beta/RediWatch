@@ -21,12 +21,25 @@ import { mainListItems, secondaryListItems } from './NavBar';
 import ConfigDropdown from './ConfigDropdown';
 import CurrentConfig from './CurrentConfig';
 import ConfigurationMethods from './ConfigurationMethods';
+import TextField from '@mui/material/TextField';
+import { FormGroup } from '@mui/material';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import Button from '@mui/material/Button';
 
 function Copyright(props: any) {
   return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
+    <Typography
+      variant="body2"
+      color="text.secondary"
+      align="center"
+      {...props}
+    >
       {'Copyright © '}
-      <Link color="inherit" href="https://github.com/oslabs-beta/RediWatch/tree/main">
+      <Link
+        color="inherit"
+        href="https://github.com/oslabs-beta/RediWatch/tree/main"
+      >
         RediWatch
       </Link>{' '}
       {new Date().getFullYear()}
@@ -59,31 +72,31 @@ const AppBar = styled(MuiAppBar, {
   }),
 }));
 
-const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
-  ({ theme, open }) => ({
-    '& .MuiDrawer-paper': {
-      position: 'relative',
-      whiteSpace: 'nowrap',
-      width: drawerWidth,
+const Drawer = styled(MuiDrawer, {
+  shouldForwardProp: (prop) => prop !== 'open',
+})(({ theme, open }) => ({
+  '& .MuiDrawer-paper': {
+    position: 'relative',
+    whiteSpace: 'nowrap',
+    width: drawerWidth,
+    transition: theme.transitions.create('width', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+    boxSizing: 'border-box',
+    ...(!open && {
+      overflowX: 'hidden',
       transition: theme.transitions.create('width', {
         easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.enteringScreen,
+        duration: theme.transitions.duration.leavingScreen,
       }),
-      boxSizing: 'border-box',
-      ...(!open && {
-        overflowX: 'hidden',
-        transition: theme.transitions.create('width', {
-          easing: theme.transitions.easing.sharp,
-          duration: theme.transitions.duration.leavingScreen,
-        }),
-        width: theme.spacing(7),
-        [theme.breakpoints.up('sm')]: {
-          width: theme.spacing(9),
-        },
-      }),
-    },
-  }),
-);
+      width: theme.spacing(7),
+      [theme.breakpoints.up('sm')]: {
+        width: theme.spacing(9),
+      },
+    }),
+  },
+}));
 
 // Set theme to dark mode always
 const darkTheme = createTheme({
@@ -127,7 +140,7 @@ export default function Dashboard() {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              Home 
+              Home
             </Typography>
             <IconButton color="inherit">
               <Badge badgeContent={4} color="secondary">
@@ -170,41 +183,41 @@ export default function Dashboard() {
         >
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-            <Grid container spacing={3}>
-              {/* Chart */}
-              <Grid item xs={12} md={8} lg={9}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    height: 240,
-                  }}
+            <Box alignItems="center" justifyContent="center">
+              Create a New Connection
+              <br></br>
+              <FormGroup>
+                <TextField
+                  id="nick-name"
+                  label="Nickname"
+                  variant="outlined"
+                  //margin="normal"
+                  helperText="Create a nickname for this connection"
+                  style={{ width: 400 }}
+                />
+                <br></br>
+                <TextField
+                  id="database-string"
+                  label="Connection String"
+                  variant="outlined"
+                  // margin="normal"
+                  helperText="Enter Your Redis Connection String"
+                  style={{ width: 400 }}
+                />
+                <br></br>
+                <FormControlLabel
+                  control={<Checkbox defaultChecked />}
+                  label="Save Connection"
+                />
+                <br></br>
+                <Button
+                  variant="contained"
+                 
                 >
-                  <ConfigDropdown />
-                </Paper>
-              </Grid>
-              {/* Recent Deposits */}
-              <Grid item xs={12} md={4} lg={3}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    height: 240,
-                  }}
-                >
-                  <CurrentConfig/>
-                </Paper>
-              </Grid>
-              {/* Recent Orders */}
-              <Grid item xs={12}>
-                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  <ConfigurationMethods/>
-                </Paper>
-              </Grid>
-            </Grid>
-            <Copyright sx={{ pt: 4 }} />
+                  Submit
+                </Button>
+              </FormGroup>
+            </Box>
           </Container>
         </Box>
       </Box>
