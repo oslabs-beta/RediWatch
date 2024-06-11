@@ -34,6 +34,9 @@ function Copyright(props: any) {
 const darkTheme = createTheme({
   palette: {
     mode: 'dark',
+    primary: {
+      main: '#C63124',
+    }
   },
 });
 
@@ -104,7 +107,7 @@ export default function SignInSide() {
               alignItems: 'center',
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+            <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
@@ -139,7 +142,7 @@ export default function SignInSide() {
                 type="submit"
                 fullWidth
                 variant="contained"
-                color='secondary'
+                color='primary'
                 sx={{ mt: 3, mb: 2 }}
               >
                 Sign In
