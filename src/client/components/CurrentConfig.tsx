@@ -10,9 +10,9 @@ function preventDefault(event: React.MouseEvent) {
 export default function Deposits() {
   return (
     <React.Fragment>
-      <Title>Current Config</Title>
+      <Title>Current maxmemory Limit</Title>
       <Typography component="p" variant="h4">
-        $3,024.00
+        3GB
       </Typography>
       <Typography color="text.secondary" sx={{ flex: 1 }}>
         on 10 June, 2024

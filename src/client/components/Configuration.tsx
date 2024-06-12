@@ -19,6 +19,7 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { mainListItems, secondaryListItems } from './NavBar';
 import ConfigDropdown from './ConfigDropdown';
+import TTLDropdown from './TTLDropdown';
 import CurrentConfig from './CurrentConfig';
 import ConfigurationMethods from './ConfigurationMethods';
 
@@ -197,6 +198,7 @@ export default function Dashboard() {
                   }}
                 >
                   <ConfigDropdown />
+                  <TTLDropdown />
                 </Paper>
               </Grid>
               {/* Recent Deposits */}
