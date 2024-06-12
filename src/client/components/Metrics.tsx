@@ -22,6 +22,8 @@ import ConfigDropdown from './ConfigDropdown';
 import CurrentConfig from './CurrentConfig';
 import ConfigurationMethods from './ConfigurationMethods';
 
+import imgSrc from '../../assets/RediWatch_logo.png';
+
 function Copyright(props: any) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -89,6 +91,9 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 const darkTheme = createTheme({
   palette: {
     mode: 'dark',
+    primary: {
+      main: '#C63124',
+    }
   },
 });
 
@@ -100,6 +105,16 @@ export default function Dashboard() {
 
   return (
     <ThemeProvider theme={darkTheme}>
+      <Box
+            component="img"
+            src={imgSrc}
+            alt="RediWatch logo"
+            sx={{
+               position: 'relative',
+               maxWidth: '200px',
+               marginLeft: '18px',
+            }}
+          />
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
         <AppBar position="absolute" open={open}>
@@ -130,7 +145,7 @@ export default function Dashboard() {
               Metrics
             </Typography>
             <IconButton color="inherit">
-              <Badge badgeContent={4} color="secondary">
+              <Badge badgeContent={4} color="primary">
                 <NotificationsIcon />
               </Badge>
             </IconButton>
