@@ -196,7 +196,7 @@ export default function Dashboard() {
                     height: 240,
                   }}
                 >
-                  <ConfigDropdown />
+                  <iframe src="http://localhost:3000/d-solo/bdop44c6g60hsf/new-dashboard?orgId=1&from=1718296030928&to=1718317630928&panelId=1" width="450" height="200" frameBorder="0"></iframe>
                 </Paper>
               </Grid>
               {/* Recent Deposits */}
