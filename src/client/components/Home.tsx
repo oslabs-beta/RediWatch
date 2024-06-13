@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from "react";
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import MuiDrawer from '@mui/material/Drawer';
@@ -115,6 +116,26 @@ export default function Dashboard() {
   const toggleDrawer = () => {
     setOpen(!open);
   };
+  const [string, setString] = useState<string>('');
+    const [nickname, setNickname] = useState<string>('');
+
+    const handleNicknameInput = (e: React.ChangeEvent<HTMLInputElement>): void => {
+      setNickname(e.target.value);
+
+     
+  };
+
+  const handleConnectionStringInput = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    setString(e.target.value);
+};
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+   
+    console.log( 'Nickname:', nickname, 'Redis Connection String: ', string); 
+   
+   // ..code to submit form to backend here...
+
+}
 
   return (
     <ThemeProvider theme={darkTheme}>
@@ -201,9 +222,12 @@ export default function Dashboard() {
             <Box alignItems="center" justifyContent="center">
               Create a New Connection
               <br></br>
+           <form onSubmit={handleSubmit}>
               <FormGroup>
                 <TextField
                   id="nick-name"
+               
+                  onInput={handleNicknameInput}
                   label="Nickname"
                   variant="outlined"
                   //margin="normal"
@@ -213,6 +237,7 @@ export default function Dashboard() {
                 <br></br>
                 <TextField
                   id="database-string"
+                 onInput={handleConnectionStringInput}
                   label="Connection String"
                   variant="outlined"
                   // margin="normal"
@@ -226,12 +251,14 @@ export default function Dashboard() {
                 />
                 <br></br>
                 <Button
+                  type="submit"
                   variant="contained"
-                 
+                  style={{ width: 400 }}
                 >
                   Submit
                 </Button>
               </FormGroup>
+              </form>
             </Box>
           </Container>
         </Box>
