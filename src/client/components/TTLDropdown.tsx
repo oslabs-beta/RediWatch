@@ -20,14 +20,19 @@ const MenuProps = {
 };
 
 const names = [
-  'noeviction',
-  'allkeys-lru',
-  'allkeys-lfu',
-  'volatile-lru',
-  'volatile-lfu',
-  'allkeys-random',
-  'volatile-random',
-  'volatile-ttl',
+  '5 seconds',
+  '10 seconds',
+  '15 seconds',
+  '20 seconds',
+  '25 seconds',
+  '30 seconds',
+  '35 seconds',
+  '40 seconds',
+  '45 seconds',
+  '50 seconds',
+  '55 seconds',
+  '60 seconds',
+  '65 seconds',
 ];
 
 function getStyles(name: string, personName: readonly string[], theme: Theme) {

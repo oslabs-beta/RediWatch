@@ -60,11 +60,7 @@ const rows = [
   ),
 ];
 
-function preventDefault(event: React.MouseEvent) {
-  event.preventDefault();
-}
-
-export default function Orders() {
+export default function Policies() {
   return (
     <React.Fragment>
       <Title>Key Eviction Policies</Title>
@@ -86,7 +82,7 @@ export default function Orders() {
           ))}
         </TableBody>
       </Table>
-      <Link color="primary" href="#" onClick={preventDefault} sx={{ mt: 3 }}>
+      <Link color="primary" href="https://redis.io/docs/latest/develop/reference/eviction/" target="_blank" sx={{ mt: 3 }}>
         Read the docs
       </Link>
     </React.Fragment>
