@@ -132,7 +132,8 @@ export default function Dashboard() {
     event.preventDefault();
    
     console.log( 'Nickname:', nickname, 'Redis Connection String: ', string); 
-   
+    if(nickname === '' || string === '') return alert("Please fill out all fields")
+    return alert("Connection Added Successfully")
    // ..code to submit form to backend here...
 
 }
