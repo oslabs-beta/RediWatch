@@ -1,7 +1,9 @@
 import * as React from 'react';
-import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import Title from './Title';
+import IconButton from '@mui/material/IconButton';
+import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
+import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
 
 function preventDefault(event: React.MouseEvent) {
   event.preventDefault();
@@ -10,17 +12,16 @@ function preventDefault(event: React.MouseEvent) {
 export default function Deposits() {
   return (
     <React.Fragment>
-      <Title>Current Config</Title>
+      <Title>Current maxmemory Limit</Title>
       <Typography component="p" variant="h4">
-        $3,024.00
+        3GB
       </Typography>
       <Typography color="text.secondary" sx={{ flex: 1 }}>
-        on 10 June, 2024
+        of memory allocated
       </Typography>
       <div>
-        <Link color="primary" href="#" onClick={preventDefault}>
-          View metrics
-        </Link>
+        <IconButton><ArrowCircleLeftIcon /></IconButton>
+        <IconButton><ArrowCircleRightIcon /></IconButton>
       </div>
     </React.Fragment>
   );

@@ -9,16 +9,19 @@ import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
+import SpeedIcon from '@mui/icons-material/Speed';
 import Badge from '@mui/material/Badge';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Link from '@mui/material/Link';
+import Button from '@mui/material/Button';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { mainListItems, secondaryListItems } from './NavBar';
 import ConfigDropdown from './ConfigDropdown';
+import TTLDropdown from './TTLDropdown';
 import CurrentConfig from './CurrentConfig';
 import ConfigurationMethods from './ConfigurationMethods';
 
@@ -186,7 +189,7 @@ export default function Dashboard() {
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>
-              {/* Chart */}
+              {/* Configuration Selections */}
               <Grid item xs={12} md={8} lg={9}>
                 <Paper
                   sx={{
@@ -197,9 +200,11 @@ export default function Dashboard() {
                   }}
                 >
                   <ConfigDropdown />
+                  <TTLDropdown />
+                  <Button variant="outlined" href="/metrics" endIcon={<SpeedIcon />} style={{marginLeft: "50%", marginTop: "15px"}}>Run Performance Test</Button>
                 </Paper>
               </Grid>
-              {/* Recent Deposits */}
+              {/* Current maxmemory config */}
               <Grid item xs={12} md={4} lg={3}>
                 <Paper
                   sx={{
@@ -212,7 +217,7 @@ export default function Dashboard() {
                   <CurrentConfig/>
                 </Paper>
               </Grid>
-              {/* Recent Orders */}
+              {/* Eviction Policies */}
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
                   <ConfigurationMethods/>
