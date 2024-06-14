@@ -23,6 +23,7 @@ import CurrentConfig from './CurrentConfig';
 import ConfigurationMethods from './ConfigurationMethods';
 
 import imgSrc from '../../assets/RediWatch_logo.png';
+import imgSrc2 from '../../assets/Mock Graph.png';
 
 function Copyright(props: any) {
   return (
@@ -187,7 +188,7 @@ export default function Dashboard() {
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>
               {/* Chart */}
-              <Grid item xs={12} md={8} lg={9}>
+              <Grid item xs={12} md={8} lg={8}>
                 <Paper
                   sx={{
                     p: 2,
@@ -196,11 +197,11 @@ export default function Dashboard() {
                     height: 240,
                   }}
                 >
-                  <iframe src="http://localhost:3000/d-solo/bdop44c6g60hsf/new-dashboard?orgId=1&from=1718296030928&to=1718317630928&panelId=1" width="450" height="200" frameBorder="0"></iframe>
+                  <iframe src="http://localhost:3000/d-solo/bdop44c6g60hsf/new-dashboard?orgId=1&from=1718331450172&to=1718332350172&panelId=2" width="700" height="200"></iframe>
                 </Paper>
               </Grid>
               {/* Recent Deposits */}
-              <Grid item xs={12} md={4} lg={3}>
+              <Grid item xs={12} md={4} lg={4}>
                 <Paper
                   sx={{
                     p: 2,
@@ -209,13 +210,13 @@ export default function Dashboard() {
                     height: 240,
                   }}
                 >
-                  <CurrentConfig/>
+                  <iframe src="http://localhost:3000/d-solo/bdop44c6g60hsf/new-dashboard?orgId=1&from=1718303258813&to=1718324858813&panelId=1" height="200"></iframe>
                 </Paper>
               </Grid>
               {/* Recent Orders */}
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  <ConfigurationMethods/>
+                  <img src={imgSrc2} />
                 </Paper>
               </Grid>
             </Grid>

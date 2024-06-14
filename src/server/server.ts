@@ -2,7 +2,7 @@ import express, { Request, Response, NextFunction } from 'express';
 import redis, { createClient } from 'redis';
 
 const app = express();
-const PORT = 3000;
+const PORT = 3001;
 
 app.use(express.json());
 
@@ -60,7 +60,7 @@ interface Metrics {
 app.get('/metrics', async (req, res) => {
     try {
         const info = await redisClient.info();
-        // console.log('Redis INFO:', info); // Log the redis metrics using INFO command
+        console.log('Redis INFO:', info); // Log the redis metrics using INFO command
 
         const metrics: Metrics = info.split('\n').reduce((acc: Metrics, line) => {
             const parts = line.split(':');
@@ -70,10 +70,10 @@ app.get('/metrics', async (req, res) => {
             return acc;
         }, {});
 
-        // console.log('Parsed Metrics:', metrics);  // Log the parsed metrics
+        console.log('Parsed Metrics:', metrics);  // Log the parsed metrics
 
         const prometheusMetrics = prometheusFormat(metrics);
-        // console.log('Prometheus Metrics:', prometheusMetrics);  // Log the Prometheus formatted metrics
+        console.log('Prometheus Metrics:', prometheusMetrics);  // Log the Prometheus formatted metrics
 
         res.set('Content-Type', 'text/plain');
         res.send(prometheusMetrics);

@@ -81,7 +81,7 @@ export default function ConfigurationMethods1() {
         </TableBody>
       </Table>
       <Link color="primary" href="#" onClick={preventDefault} sx={{ mt: 3 }}>
-        See more orders
+        Show more
       </Link>
     </React.Fragment>
   );
