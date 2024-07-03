@@ -1,5 +1,8 @@
 import express, { Request, Response, NextFunction } from 'express';
 import redis, { createClient } from 'redis';
+import { performance } from 'perf_hooks';
+// // prometheus library
+// import promClient from 'prom-client';
 
 const app = express();
 const PORT = 3001;
@@ -76,7 +79,48 @@ app.use(express.json());
 //     }
 // });
 
+app.post('/test', async (req, res) => {
+    const redisClient = createClient({
+        url: 'redis://default:J4qW0Kf6udoPHKmthBviCYfGXE5ommO2@redis-11565.c274.us-east-1-3.ec2.redns.redis-cloud.com:11565'
+    })
+    
+    redisClient.on('error', (err) => console.error('Redis Client Error', err));
+    redisClient.on('connect', () => console.log('Redis client connected'));
+    try {
+        // Connect to Redis
+        await redisClient.connect();
+        console.log('connected to Redis');
 
+        // add sample data to mimic cache behavior
+        const sampleData = Array.from({ length: 1000 }, (_, i) => `key${i}`);
+        // set ttl = 1 hour
+        const ttl = 60 * 60;
+
+        const start = performance.now();
+
+        for (const key of sampleData) {
+            await redisClient.set(key, `value${key}`, { EX: ttl });
+        }
+    
+        for (let i = 0; i < 2000; i++) {
+            const key = `key${Math.floor(Math.random() * 1000)}`;
+            await redisClient.get(key);
+        }
+
+        const end = performance.now();
+        // converting to seconds
+        const duration = (end - start) / 1000;
+        console.log('Duration: ', duration);
+
+        
+
+        await redisClient.quit();
+        res.send({ duration });
+    } catch (error) {
+        console.error('Error during Redis operations: ', error);
+        res.status(500).send('Error during Redis operations');
+    }    
+});
 
 // global error handler
 // app.use('/', (err, req, res, _next) => {
