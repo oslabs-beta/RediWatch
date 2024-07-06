@@ -28,6 +28,7 @@ CREATE TABLE public.users (
 CREATE TABLE  public.caches (
 	"_id" serial NOT NULL,
 	"connectionstring" varchar NOT NULL,
+	"connectionnickname" varchar NOT NULL,
 	"user_id" bigint,
 	"config_id" bigint,
 	CONSTRAINT "caches_pk" PRIMARY KEY ("_id")

@@ -116,26 +116,49 @@ export default function Dashboard() {
   const toggleDrawer = () => {
     setOpen(!open);
   };
-  const [string, setString] = useState<string>('');
-    const [nickname, setNickname] = useState<string>('');
 
+  //connection string and nickname state management
+  const [string, setString] = useState<string>('');
+  const [nickname, setNickname] = useState<string>('');
+
+  //updates the nickname state to user input
     const handleNicknameInput = (e: React.ChangeEvent<HTMLInputElement>): void => {
       setNickname(e.target.value);
 
      
   };
-
+ //updates the connectin string state to user input
   const handleConnectionStringInput = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setString(e.target.value);
 };
+
+//handlesubmit function once form is submitted
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-   
-    console.log( 'Nickname:', nickname, 'Redis Connection String: ', string); 
-    if(nickname === '' || string === '') return alert("Please fill out all fields")
-    return alert("Connection Added Successfully")
-   // ..code to submit form to backend here...
-
+   //grabs connectin string and nickname from state
+   const data = {
+    connectionnickname: nickname,
+    connectionstring: string,
+    //hardcoding the user_id, will eventually need to pull this from the user somehow :-)
+    user_id: 1,
+};
+//post request to "add connection"
+fetch('/api/add-connection', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+})
+.then(response => response.json())
+.then(data => {
+    console.log('Success:', data);
+    alert("Connection Added Successfully");
+})
+.catch((error) => {
+    console.error('Error:', error);
+    alert("Failed to add connection");
+});
 }
 
   return (
