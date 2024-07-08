@@ -4,6 +4,9 @@ import { performance } from 'perf_hooks';
 import Redis, { Redis as RedisClientType } from 'ioredis';
 // // prometheus library
 // import promClient from 'prom-client';
+import dotenv from 'dotenv';
+dotenv.config();
+
 
 const app = express();
 const PORT = 3001;
@@ -21,10 +24,10 @@ interface RedisConfigResult {
 }
 
 const redisClient: RedisClientType = new Redis({
-    host: `redis-11565.c274.us-east-1-3.ec2.redns.redis-cloud.com`,
+    host: process.env.REDIS_CLIENT_HOST,
     port: 11565,
-    password: 'J4qW0Kf6udoPHKmthBviCYfGXE5ommO2',
-    username: 'default',
+    password: process.env.REDIS_CLIENT_PW,
+    username: process.env.REDIS_CLIENT_USER,
 })
 
 redisClient.on('error', (err) => console.error('Redis Client Error', err));
