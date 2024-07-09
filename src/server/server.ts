@@ -2,8 +2,6 @@ import express, { Request, Response, NextFunction } from 'express';
 // import redis, { createClient, RedisClientType } from 'redis';
 import { performance } from 'perf_hooks';
 import Redis, { Redis as RedisClientType } from 'ioredis';
-// // prometheus library
-// import promClient from 'prom-client';
 import dotenv from 'dotenv';
 dotenv.config();
 
