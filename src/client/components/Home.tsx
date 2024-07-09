@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from "react";
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import MuiDrawer from '@mui/material/Drawer';
@@ -116,6 +117,50 @@ export default function Dashboard() {
     setOpen(!open);
   };
 
+  //connection string and nickname state management
+  const [string, setString] = useState<string>('');
+  const [nickname, setNickname] = useState<string>('');
+
+  //updates the nickname state to user input
+    const handleNicknameInput = (e: React.ChangeEvent<HTMLInputElement>): void => {
+      setNickname(e.target.value);
+
+     
+  };
+ //updates the connectin string state to user input
+  const handleConnectionStringInput = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    setString(e.target.value);
+};
+
+//handlesubmit function once form is submitted
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+   //grabs connectin string and nickname from state
+   const data = {
+    connectionnickname: nickname,
+    connectionstring: string,
+    //hardcoding the user_id, will eventually need to pull this from the user somehow :-)
+    user_id: 1,
+};
+//post request to "add connection"
+fetch('/api/add-connection', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+})
+.then(response => response.json())
+.then(data => {
+    console.log('Success:', data);
+    alert("Connection Added Successfully");
+})
+.catch((error) => {
+    console.error('Error:', error);
+    alert("Failed to add connection");
+});
+}
+
   return (
     <ThemeProvider theme={darkTheme}>
       <Box
@@ -201,9 +246,12 @@ export default function Dashboard() {
             <Box alignItems="center" justifyContent="center">
               Create a New Connection
               <br></br>
+           <form onSubmit={handleSubmit}>
               <FormGroup>
                 <TextField
                   id="nick-name"
+               
+                  onInput={handleNicknameInput}
                   label="Nickname"
                   variant="outlined"
                   //margin="normal"
@@ -213,6 +261,7 @@ export default function Dashboard() {
                 <br></br>
                 <TextField
                   id="database-string"
+                 onInput={handleConnectionStringInput}
                   label="Connection String"
                   variant="outlined"
                   // margin="normal"
@@ -226,12 +275,14 @@ export default function Dashboard() {
                 />
                 <br></br>
                 <Button
+                  type="submit"
                   variant="contained"
-                 
+                  style={{ width: 400 }}
                 >
                   Submit
                 </Button>
               </FormGroup>
+              </form>
             </Box>
           </Container>
         </Box>
