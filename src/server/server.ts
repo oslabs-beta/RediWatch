@@ -1,10 +1,8 @@
-import express, { Request, Response, NextFunction } from 'express';
-// import redis, { createClient, RedisClientType } from 'redis';
+import express, { Request, Response } from 'express';
 import { performance } from 'perf_hooks';
 import Redis, { Redis as RedisClientType } from 'ioredis';
 import dotenv from 'dotenv';
 dotenv.config();
-
 
 const app = express();
 const PORT = 3001;
@@ -17,66 +15,31 @@ interface PerformanceMetrics {
     misses: number;
 }
 
-interface RedisConfigResult {
-    maxmemory: string;
-}
-
 const redisClient: RedisClientType = new Redis({
-    host: process.env.REDIS_CLIENT_HOST,
-    port: 11565,
-    password: process.env.REDIS_CLIENT_PW,
-    username: process.env.REDIS_CLIENT_USER,
-})
+    host: 'localhost',
+    port: 6379
+});
 
 redisClient.on('error', (err) => console.error('Redis Client Error', err));
 redisClient.on('connect', () => console.log('Redis client connected'));
 
-app.post('/test', async (req, res) => {
-    // const redisClient: RedisClientType = createClient({
-    //     url: 'redis://default:J4qW0Kf6udoPHKmthBviCYfGXE5ommO2@redis-11565.c274.us-east-1-3.ec2.redns.redis-cloud.com:11565'
-    // })
-   
+app.post('/test', async (req: Request, res: Response) => {
     try {
         // Connect to Redis
         await redisClient.ping();
         console.log('connected to Redis');
         
-        // Check supported configuration parameters
-        const supportedConfigs = await redisClient.config('GET', '*') as Array<string>;
-        console.log('Supported CONFIG parameters: ', supportedConfigs);
+        // Set maxmemory to 30mb
+        await redisClient.config('SET', 'maxmemory', '30mb');
+        console.log('maxmemory set to 30mb');
 
-        if (supportedConfigs.includes('maxmemory')) {
-            // Set maxmemory to 30mb if supported
-            await redisClient.config('SET', 'maxmemory', '30mb');
-            console.log('maxmemory set to 30mb');
-
-            // Fetch maxmemory configuration
-            const configResult = await redisClient.config('GET', 'maxmemory') as Array<string>;
-            console.log('Config Result: ', configResult);
-
-            // Destructure the result to get the maxmemory value
-            const maxMemoryIndex = configResult.findIndex(config => config === 'maxmemory');
-            const maxMemory = maxMemoryIndex !== -1 ? configResult[maxMemoryIndex + 1] : undefined;
-            console.log('maxmemory: ', maxMemory);
-        } else {
-            console.log('maxmemory is not a supported CONFIG parameter.');
-        }
+        // Fetch maxmemory configuration
+        const configResult = await redisClient.config('GET', 'maxmemory') as Array<string>;
+        console.log('Config Result: ', configResult);
 
         // Test cache performance
         const performanceMetrics = await testCachePerformance(redisClient);
         res.json(performanceMetrics);
-
-        // test each eviction methods
-        // const evictionPolicies = ['allkeys-lru', 'volatile-lru', 'allkeys-random', 'volatile-random', 'volatile-ttl', 'noeviction'];
-        
-        // for (const policy of evictionPolicies) {
-        //     console.log(`Testing ${policy}`);
-        //     const performanceMetrics = await testCachePerformance(redisClient, policy); 
-        //     console.log(`Performance metrics for policy ${policy}: `, performanceMetrics);
-            
-        // }
-        // const performanceMetrics = await testCachePerformance(redisClient);
-        // res.send(performanceMetrics);
         
     } catch (error) {
         console.error('Error during Redis operations: ', error);
@@ -84,47 +47,22 @@ app.post('/test', async (req, res) => {
     }    
 });
 
-
-
 async function testCachePerformance(redisClient: RedisClientType): Promise<PerformanceMetrics> {
-    // await redisClient.configSet('maxmemory', '30mb');
-    // await redisClient.configSet('maxmemory-policy', evictionPolicy);
-    // console.log('maxmemory reset');
-
-    // await redisClient.configGet('maxmemory', function(err: any, result: any) {
-    //     if (err) {
-    //         console.error('Error: ', err);
-    //     } else {
-    //         console.log('maxmemory: ', result[1]);
-    //     }
-    // })
-
-    // try {
-    //     const result = await redisClient.configGet('maxmemory');
-    //     const maxMemory = result['maxmemory'];
-    //     console.log('maxmemory: ', maxMemory);
-    // } catch (error) {
-    //     console.error('Error fetching maxmemory:', error);
-    // }
-
-    // add sample data to mimic cache behavior
-    const sampleData = Array.from({ length: 1000 }, (_, i) => `key${i}`);
-    // set ttl = 1 hour
-    const ttl = 60 * 60;
+    const sampleData = Array.from({ length: 10000 }, (_, i) => `key${i}`);
+    const ttl = 60 * 60; // 1 hour
 
     const start = performance.now();
 
-    // setting keys
+    // Setting keys
     for (const key of sampleData) {
-        await redisClient.set(key, `value${key}`, 'EX', ttl );
+        await redisClient.set(key, `value${key}`, 'EX', ttl);
     }
     
-
-    // retrieve keys
+    // Retrieve keys
     let hits = 0;
     let misses = 0;
-    for (let i = 0; i < 2000; i++) {
-        const key = `key${Math.floor(Math.random() * 1000)}`;
+    for (let i = 0; i < 20000; i++) {
+        const key = `key${Math.floor(Math.random() * 10000)}`;
         const result = await redisClient.get(key);
         if (result !== null) {
             hits++;
@@ -134,26 +72,14 @@ async function testCachePerformance(redisClient: RedisClientType): Promise<Perfo
     }
 
     const end = performance.now();
-    // converting to seconds
-    const duration = (end - start) / 1000;
+    const duration = (end - start) / 1000; // converting to seconds
+
     console.log('Duration: ', duration);
     console.log('hits: ', hits);
     console.log('misses: ', misses);
     
-
     await redisClient.quit();
     return { duration, hits, misses };
 }
-// global error handler
-// app.use('/', (err, req, res, _next) => {
-//   const defaultErr = {
-//     log: 'Express error handler caught unknown middleware error',
-//     status: 500,
-//     message: { err: 'An error occurred' },
-//   };
-//   const errorObj = Object.assign({}, defaultErr, err);
-//   console.log(errorObj.log);
-//   return res.status(errorObj.status).json(errorObj.message);
-// })
 
 app.listen(PORT, () => console.log(`server is listening on port ${PORT}`));
