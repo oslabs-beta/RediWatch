@@ -30,8 +30,8 @@ app.post('/test', async (req: Request, res: Response) => {
         console.log('connected to Redis');
         
         // Set maxmemory to 30mb
-        await redisClient.config('SET', 'maxmemory', '30mb');
-        console.log('maxmemory set to 30mb');
+        await redisClient.config('SET', 'maxmemory', '216mb');
+        console.log('maxmemory set to 216mb');
 
         // Fetch maxmemory configuration
         const configResult = await redisClient.config('GET', 'maxmemory') as Array<string>;
