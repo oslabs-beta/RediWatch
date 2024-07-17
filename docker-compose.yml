@@ -4,7 +4,7 @@ services:
     image: redis:latest
     ports:
       - "6379:6379"
-    command: ["redis-server", "--appendonly", "yes", "--maxmemory", "30mb", "--maxmemory-policy", "allkeys-lru"]
+    command: ["redis-server", "--appendonly", "yes"]
 
   redis_exporter:
     image: oliver006/redis_exporter
