@@ -60,6 +60,14 @@ module.exports = {
     // }),
   ],
   devServer: {
+     // Required for Docker to work with dev server
+     host: '0.0.0.0',
+     //host: localhost,
+     port: 8080,
+     //enable HMR on the devServer
+     hot: true,
+     // fallback to root for other urls
+     historyApiFallback: true,
     static: {
       directory: path.join(__dirname, './dist'),
     },

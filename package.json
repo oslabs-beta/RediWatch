@@ -5,7 +5,11 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon ./src/server/server.ts & webpack-dev-server",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --config ./webpack.config.js",
+    "dev:hot": "NODE_ENV=development nodemon ./dist/server/server.js & webpack-dev-server --open --hot",
+    "docker-dev:hot": "docker-compose -f docker-compose-dev-hot.yml up",
+    "run-tsc": "tsc"
   },
   "author": "",
   "license": "ISC",
@@ -35,7 +39,7 @@
     "html-webpack-plugin": "^5.6.0",
     "nodemon": "^3.1.0",
     "ts-loader": "^9.5.1",
-    "typescript": "^5.3.3",
+    "typescript": "^5.5.3",
     "typescript-eslint": "^7.1.0",
     "url-loader": "^4.1.1",
     "webpack": "^5.65.0",
@@ -55,6 +59,7 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.23.1",
     "redis": "^4.6.15",
-    "ts-node": "^10.9.2"
+    "ts-node": "^10.9.2",
+    "tsc": "^2.0.4"
   }
 }

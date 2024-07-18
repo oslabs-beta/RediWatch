@@ -1,0 +1,14 @@
+version: "3"
+services:
+  dev:  
+    image: rediwatchtest/mm-dev
+    container_name: rediwatchtest-dev-hot
+    ports: 
+      - "8080:8080"
+    volumes:
+      - ./:/usr/src/app
+      - node_modules:/usr/src/app/node_modules
+    command: npm run dev:hot
+volumes:
+  node_modules:
+  dev-db-volume:
