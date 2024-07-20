@@ -1,8 +1,10 @@
-import express, { Request, Response } from 'express';
+// import express, { Request, Response } from 'express';
+// @ts-nocheck
+const express = require('express');
 import { performance } from 'perf_hooks';
 import Redis, { Redis as RedisClientType } from 'ioredis';
-import dotenv from 'dotenv';
-dotenv.config();
+import 'dotenv/config';
+require('dotenv').config();
 
 const app = express();
 const PORT = 3001;
@@ -16,7 +18,7 @@ interface PerformanceMetrics {
 }
 
 const redisClient: RedisClientType = new Redis({
-    host: 'localhost',
+    host: "redis",
     port: 6379
 });
 

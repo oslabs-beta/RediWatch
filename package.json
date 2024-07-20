@@ -4,13 +4,13 @@
   "description": "The problem: Caching provides significant performance optimization for any application, however it is difficult to confirm the efficiency of your cache.  Also, one of the biggest problems facing developers today is how to handle cache invalidation (checking to see if the value stored in your cache matches the value in the primary source).",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon ./src/server/server.ts & webpack-dev-server",
+    "start": "nodemon ./src/server/server.js & webpack-dev-server",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc",
+    "build": "webpack --config ./webpack.config.js",
     "run-tsc": "tsc",
-    "dev:server": "NODE_ENV=development nodemon dist/server/server.js",
+    "dev:server": "NODE_ENV=development nodemon ./src/server/server.js",
     "dev:client": "webpack serve --config webpack.config.js --hot",
-    "docker-dev:hot": "docker-compose -f docker-compose-dev-hot.yml up --build"    
+    "docker-dev:hot": "docker-compose -f docker-compose-dev-hot.yml up"    
   },
   "author": "",
   "license": "ISC",
@@ -46,6 +46,7 @@
     "webpack": "^5.65.0",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^4.7.2"
+    
   },
   "dependencies": {
     "@emotion/react": "^11.11.4",
@@ -61,6 +62,7 @@
     "react-router-dom": "^6.23.1",
     "redis": "^4.6.15",
     "ts-node": "^10.9.2",
-    "tsc": "^2.0.4"
+    "tsc": "^2.0.4",
+    "typescript": "^5.5.3"
   }
 }

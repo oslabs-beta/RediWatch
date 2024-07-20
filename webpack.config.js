@@ -8,7 +8,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
-    publicPath: "/",
+    // publicPath: "/",
   },
   module: {
     rules: [
@@ -66,7 +66,7 @@ module.exports = {
      historyApiFallback: true,
     static: {
       directory: path.join(__dirname, './dist'),
-      publicPath: "/",
+      // publicPath: "/",
     },
     proxy: {
       '/api': 'http://localhost:3001',
