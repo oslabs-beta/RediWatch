@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --config ./webpack.config.js",
     "run-tsc": "tsc",
-    "dev:server": "NODE_ENV=development nodemon ./src/server/server.js",
+    "dev:server": "NODE_ENV=development ts-node ./src/server/server.ts",
     "dev:client": "webpack serve --config webpack.config.js --hot",
     "docker-dev:hot": "docker-compose -f docker-compose-dev-hot.yml up"    
   },
