@@ -224,6 +224,8 @@ export default function Dashboard() {
           </Container>
         </Box>
       </Box>
+      
     </ThemeProvider>
+   
   );
 }

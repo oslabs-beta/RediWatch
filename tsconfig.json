@@ -11,6 +11,6 @@
       "moduleResolution": "node",
       "jsx": "react",
     },
-    "include": ["src/**/*"],
+    "include": ["src/**/*", "elephantsql.js"],
     "exclude": ["node_modules"]
   }
