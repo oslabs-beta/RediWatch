@@ -1,14 +1,25 @@
 version: "3"
 services:
-  dev:  
-    image: rediwatchtest/mm-dev
-    container_name: rediwatchtest-dev-hot
-    ports: 
-      - "8080:8080"
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile-dev
     volumes:
-      - ./:/usr/src/app
-      - node_modules:/usr/src/app/node_modules
-    command: npm run dev:hot
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - 3001:3001
+    command: npm run dev:server
+
+  client:
+    build:
+      context: .
+      dockerfile: Dockerfile-dev
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - 8080:8080
+    command: npm run dev:client
 volumes:
   node_modules:
-  dev-db-volume:

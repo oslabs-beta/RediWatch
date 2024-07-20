@@ -6,10 +6,11 @@
   "scripts": {
     "start": "nodemon ./src/server/server.ts & webpack-dev-server",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --config ./webpack.config.js",
-    "dev:hot": "NODE_ENV=development nodemon ./dist/server/server.js & webpack-dev-server --open --hot",
-    "docker-dev:hot": "docker-compose -f docker-compose-dev-hot.yml up",
-    "run-tsc": "tsc"
+    "build": "tsc",
+    "run-tsc": "tsc",
+    "dev:server": "NODE_ENV=development nodemon dist/server/server.js",
+    "dev:client": "webpack serve --config webpack.config.js --hot",
+    "docker-dev:hot": "docker-compose -f docker-compose-dev-hot.yml up --build"    
   },
   "author": "",
   "license": "ISC",

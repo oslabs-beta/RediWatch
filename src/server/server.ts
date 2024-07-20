@@ -47,6 +47,10 @@ app.post('/test', async (req: Request, res: Response) => {
     }    
 });
 
+app.get('/api/test', async (req: Request, res: Response) => {
+    res.status(200).json('test')
+})
+
 async function testCachePerformance(redisClient: RedisClientType): Promise<PerformanceMetrics> {
     const sampleData = Array.from({ length: 10000 }, (_, i) => `key${i}`);
     const ttl = 60 * 60; // 1 hour
