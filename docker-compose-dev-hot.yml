@@ -1,0 +1,37 @@
+version: "3"
+services:
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile-dev
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - 3001:3001
+    depends_on: 
+      - redis
+    environment: 
+      - Redis_Url=redis://redis:6379
+    command: npm run dev:server
+
+  client:
+    build:
+      context: .
+      dockerfile: Dockerfile-dev
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - 8080:8080
+    depends_on:
+      - redis
+    command: npm run dev:client
+
+  redis:
+    image: redis
+    ports: 
+      - 6379:6379
+    command: redis-server
+volumes:
+  node_modules:

@@ -1,0 +1,17 @@
+FROM node:16.13
+RUN npm install -g webpack
+RUN npm install -g typescript 
+
+WORKDIR /usr/src/app
+COPY . /usr/src/app/
+RUN npm install
+RUN npm run build
+
+
+# Compile TypeScript files
+
+
+EXPOSE 3001
+
+# Start the server using the compiled JS files
+CMD ["npm", "run", "dev:server"]

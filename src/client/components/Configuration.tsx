@@ -201,7 +201,7 @@ export default function Dashboard() {
                 >
                   <ConfigDropdown />
                   <TTLDropdown />
-                  <Button variant="outlined" href="/metrics" endIcon={<SpeedIcon />} style={{marginLeft: "50%", marginTop: "15px"}}>Run Performance Test</Button>
+                  <Button variant="outlined" href="/metricsdata" endIcon={<SpeedIcon />} style={{marginLeft: "50%", marginTop: "15px"}}>Run Performance Test</Button>
                 </Paper>
               </Grid>
               {/* Current maxmemory config */}

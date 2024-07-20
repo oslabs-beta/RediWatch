@@ -5,7 +5,12 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon ./src/server/server.ts & webpack-dev-server",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --config ./webpack.config.js",
+    "run-tsc": "tsc",
+    "dev:server": "NODE_ENV=development nodemon ./src/server/server.js",
+    "dev:client": "webpack serve --config webpack.config.js --hot",
+    "docker-dev:hot": "docker-compose -f docker-compose-dev-hot.yml up"    
   },
   "author": "",
   "license": "ISC",
@@ -22,6 +27,7 @@
     "@types/node": "^20.11.20",
     "@types/react": "^18.2.60",
     "@types/react-dom": "^18.2.19",
+    "@types/redis": "^4.0.11",
     "@typescript-eslint/eslint-plugin": "^7.1.0",
     "@typescript-eslint/parser": "^7.1.0",
     "babel-loader": "^9.1.3",
@@ -34,12 +40,13 @@
     "html-webpack-plugin": "^5.6.0",
     "nodemon": "^3.1.0",
     "ts-loader": "^9.5.1",
-    "typescript": "^5.3.3",
+    "typescript": "^5.5.3",
     "typescript-eslint": "^7.1.0",
     "url-loader": "^4.1.1",
     "webpack": "^5.65.0",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^4.7.2"
+    
   },
   "dependencies": {
     "@emotion/react": "^11.11.4",
@@ -47,12 +54,17 @@
     "@mui/icons-material": "^5.15.19",
     "@mui/material": "^5.15.19",
     "@types/pg": "^8.11.6",
+    "dotenv": "^16.4.5",
     "express": "^4.18.2",
     "html-entities": "^2.5.2",
     "pg": "^8.12.0",
+    "ioredis": "^5.4.1",
     "react": "^18.3.1",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.23.1",
-    "ts-node": "^10.9.2"
+    "redis": "^4.6.15",
+    "ts-node": "^10.9.2",
+    "tsc": "^2.0.4",
+    "typescript": "^5.5.3"
   }
 }

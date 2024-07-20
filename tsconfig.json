@@ -1,10 +1,15 @@
 {
     "compilerOptions": {
-      "noImplicitAny": true,
+      "target": "ES6",
       "module": "commonjs",
+      "outDir": "./dist",
+      
+      "strict": true,
+      "noImplicitAny": true,
       "sourceMap": true,
+      "esModuleInterop": true,
+      "moduleResolution": "node",
       "jsx": "react",
-      "esModuleInterop": true
     },
     "include": ["src/**/*", "elephantsql.js"],
     "exclude": ["node_modules"]

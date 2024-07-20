@@ -8,14 +8,10 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
+    // publicPath: "/",
   },
   module: {
     rules: [
-      // {
-      //   test: /\.(js|jsx)$/,
-      //   exclude: /node_modules/,
-      //   use: ['babel-loader'],
-      // },
       {
         test: /\.(ts|tsx)?$/,
         exclude: /node_modules/,
@@ -60,11 +56,20 @@ module.exports = {
     // }),
   ],
   devServer: {
+     // Required for Docker to work with dev server
+     host: '0.0.0.0',
+     //host: localhost,
+     port: 8080,
+     //enable HMR on the devServer
+     hot: true,
+     // fallback to root for other urls
+     historyApiFallback: true,
     static: {
       directory: path.join(__dirname, './dist'),
+      // publicPath: "/",
     },
     proxy: {
-      '/api': 'http://localhost:3000',
+      '/api': 'http://localhost:3001',
       secure: false,
     },
     historyApiFallback: true,
