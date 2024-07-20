@@ -3,9 +3,9 @@ RUN npm install -g webpack
 RUN npm install -g typescript 
 
 WORKDIR /usr/src/app
-COPY . /usr/src/app/
+COPY package*.json /usr/src/app/
 RUN npm install
-RUN npm run build
+# RUN npm run build
 
 
 # Compile TypeScript files
@@ -14,4 +14,4 @@ RUN npm run build
 EXPOSE 3001
 
 # Start the server using the compiled JS files
-CMD ["npm", "run", "dev:server"]
+# CMD ["npm", "run", "dev:server"]

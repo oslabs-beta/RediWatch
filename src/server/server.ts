@@ -1,7 +1,7 @@
-// import express, { Request, Response } from 'express';
-import { Client } from 'pg';
+import express, { Request, Response } from 'express';
+// import { Client } from 'pg';
 // @ts-nocheck
-const express = require('express');
+// const express = require('express');
 import { performance } from 'perf_hooks';
 import Redis, { Redis as RedisClientType } from 'ioredis';
 import 'dotenv/config';

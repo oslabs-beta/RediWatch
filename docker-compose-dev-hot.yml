@@ -1,12 +1,11 @@
 version: "3"
 services:
   server:
-    build:
-      context: .
-      dockerfile: Dockerfile-dev
+    image: rediwatch
+    container_name: "rediwatch-backend"
     volumes:
       - .:/usr/src/app
-      - /usr/src/app/node_modules
+      - node_modules:/usr/src/app/node_modules
     ports:
       - 3001:3001
     depends_on: 
@@ -16,12 +15,11 @@ services:
     command: npm run dev:server
 
   client:
-    build:
-      context: .
-      dockerfile: Dockerfile-dev
+    image: rediwatch
+    container_name: "rediwatch-frontend"
     volumes:
       - .:/usr/src/app
-      - /usr/src/app/node_modules
+      - node_modules:/usr/src/app/node_modules
     ports:
       - 8080:8080
     depends_on:
