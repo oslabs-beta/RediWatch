@@ -31,5 +31,19 @@ services:
     ports: 
       - 6379:6379
     command: redis-server
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana-storage:/var/lib/grafana
+    environment:
+      - GF_INSTALL_PLUGINS=redis-datasource
+    depends_on:
+      - redis
+
 volumes:
   node_modules:
+  grafana-storage:
