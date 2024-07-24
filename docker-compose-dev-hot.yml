@@ -41,6 +41,7 @@ services:
       - grafana-storage:/var/lib/grafana
     environment:
       - GF_INSTALL_PLUGINS=redis-datasource
+      - GF_SECURITY_ALLOW_EMBEDDING=true
     depends_on:
       - redis
 

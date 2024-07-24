@@ -85,7 +85,7 @@ async function testCachePerformance(redisClient: RedisClientType): Promise<Perfo
     console.log('hits: ', hits);
     console.log('misses: ', misses);
     
-    await redisClient.quit();
+    // await redisClient.quit();
     return { duration, hits, misses };
 }
 
