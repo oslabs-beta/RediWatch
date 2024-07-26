@@ -197,7 +197,7 @@ export default function Dashboard() {
                    
                   }}
                 >
-                  <iframe src="http://localhost:3000/d-solo/fdsoglc71o8w0f/rediwatch?orgId=1&refresh=5s&panelId=5" height="300"></iframe>
+                  <iframe src="http://localhost:3000/d-solo/fdsvo9ttg6k8wd/rediwatch?orgId=1&refresh=5s&panelId=4" height="300"></iframe>
                 </Paper>
               </Grid>
               {/* Recent Deposits */}
@@ -210,13 +210,13 @@ export default function Dashboard() {
                     
                   }}
                 >
-                  <iframe src="http://localhost:3000/d-solo/fdsoglc71o8w0f/rediwatch?orgId=1&refresh=5s&panelId=3" height="300"></iframe>
+                  <iframe src="http://localhost:3000/d-solo/fdsvo9ttg6k8wd/rediwatch?orgId=1&refresh=5s&panelId=1" height="300"></iframe>
                 </Paper>
               </Grid>
               {/* Recent Orders */}
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                <iframe src="http://localhost:3000/d-solo/fdsoglc71o8w0f/rediwatch?orgId=1&refresh=5s&panelId=2" height="300"></iframe>
+                <iframe src="http://localhost:3000/d-solo/fdsvo9ttg6k8wd/rediwatch?orgId=1&refresh=5s&panelId=3" height="300"></iframe>
                 </Paper>
               </Grid>
             </Grid>
