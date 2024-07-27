@@ -1,3 +1,8 @@
+/**
+ * @module TTLDropdown
+ * @description dropdown component for selecting cache key TTL
+ */
+
 import * as React from 'react';
 import { Theme, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -19,7 +24,7 @@ const MenuProps = {
   },
 };
 
-const names = [
+const times = [
   '5 seconds',
   '10 seconds',
   '15 seconds',
@@ -35,10 +40,10 @@ const names = [
   '65 seconds',
 ];
 
-function getStyles(name: string, personName: readonly string[], theme: Theme) {
+function getStyles(time: string, TTLtime: string, theme: Theme) {
   return {
     fontWeight:
-      personName.indexOf(name) === -1
+      TTLtime.indexOf(time) === -1
         ? theme.typography.fontWeightRegular
         : theme.typography.fontWeightMedium,
   };
@@ -46,16 +51,36 @@ function getStyles(name: string, personName: readonly string[], theme: Theme) {
 
 export default function MultipleSelectChip() {
   const theme = useTheme();
-  const [personName, setPersonName] = React.useState<string[]>([]);
+  const [TTLtime, setTTLtime] = React.useState<string>('');
 
-  const handleChange = (event: SelectChangeEvent<typeof personName>) => {
+  const handleChange = (event: SelectChangeEvent<typeof TTLtime>) => {
     const {
       target: { value },
     } = event;
-    setPersonName(
+    setTTLtime(
       // On autofill we get a stringified value.
-      typeof value === 'string' ? value.split(',') : value,
+      typeof value === 'string' ? value : '60',
     );
+
+    alert(value);
+
+    // post request to "update config"
+    // fetch('/api/update-policy', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify(value),
+    // })
+    // .then(res => res.json())
+    // .then(data => {
+    //   console.log('Successfully updated:', data);
+    //   alert('Updated cache configuration');
+    // })
+    // .catch((err) => {
+    //   console.error('Error updating config:', err);
+    //   alert('Failed to update cache configuration');
+    // });
   };
 
   return (
@@ -65,26 +90,23 @@ export default function MultipleSelectChip() {
         <Select
           labelId="demo-multiple-chip-label"
           id="demo-multiple-chip"
-          multiple
-          value={personName}
+          value={TTLtime}
           onChange={handleChange}
           input={<OutlinedInput id="select-multiple-chip" label="Time-To-Live" />}
           renderValue={(selected) => (
             <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-              {selected.map((value) => (
-                <Chip key={value} label={value} />
-              ))}
+                <Chip key={selected} label={selected} />
             </Box>
           )}
           MenuProps={MenuProps}
         >
-          {names.map((name) => (
+          {times.map((time) => (
             <MenuItem
-              key={name}
-              value={name}
-              style={getStyles(name, personName, theme)}
+              key={time}
+              value={time}
+              style={getStyles(time, TTLtime, theme)}
             >
-              {name}
+              {time}
             </MenuItem>
           ))}
         </Select>

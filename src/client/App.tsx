@@ -1,6 +1,13 @@
+/**
+ * @module App.tsx
+ * @description Main page of application. Contains all routing info
+ */
+
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { createRoot } from 'react-dom/client';
+
+// import React components for each route
 import Signin from './components/Signin';
 import Signup from './components/Signup';
 import ConfigurationPage from './components/Configuration';

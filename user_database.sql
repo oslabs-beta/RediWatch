@@ -40,7 +40,9 @@ CREATE TABLE  public.caches (
 
 CREATE TABLE  public.configurations (
 	"_id" serial NOT NULL,
-    
+	"ttl" bigint,
+	"method" varchar,
+	"memory" bigint,
 	CONSTRAINT "configurations_pk" PRIMARY KEY ("_id")
 ) WITH (
   OIDS=FALSE
