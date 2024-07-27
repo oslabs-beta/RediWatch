@@ -18,12 +18,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { mainListItems, secondaryListItems } from './NavBar';
-import ConfigDropdown from './ConfigDropdown';
-import CurrentConfig from './CurrentConfig';
-import ConfigurationMethods from './ConfigurationMethods';
 
 import imgSrc from '../../assets/RediWatch_logo.png';
-import imgSrc2 from '../../assets/Mock Graph.png';
 
 function Copyright(props: any) {
   return (

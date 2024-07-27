@@ -18,10 +18,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { mainListItems, secondaryListItems } from './NavBar';
-import ConfigDropdown from './ConfigDropdown';
-import CurrentConfig from './CurrentConfig';
-import ConfigurationMethods from './ConfigurationMethods';
-import ConfigurationMethods1 from './ConfigurationMethods1';
+import ProfileCaches from './ProfileCaches';
 
 import imgSrc from '../../assets/RediWatch_logo.png';
 
@@ -88,7 +85,6 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
-// TODO remove, this demo shouldn't need to reset the theme.
 // Set theme to dark mode always
 const darkTheme = createTheme({
   palette: {
@@ -190,7 +186,7 @@ export default function Profile() {
               {/* Profiles */}
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  <ConfigurationMethods1/>
+                  <ProfileCaches/>
                 </Paper>
               </Grid>
             </Grid>

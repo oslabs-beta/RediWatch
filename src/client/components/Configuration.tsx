@@ -1,3 +1,8 @@
+/**
+ * @module Configuration
+ * @description page component for selecting cache configuration
+ */
+
 import * as React from 'react';
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -22,7 +27,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import { mainListItems, secondaryListItems } from './NavBar';
 import ConfigDropdown from './ConfigDropdown';
 import TTLDropdown from './TTLDropdown';
-import CurrentConfig from './CurrentConfig';
+import CurrentMemory from './CurrentMemory';
 import ConfigurationMethods from './ConfigurationMethods';
 
 import imgSrc from '../../assets/RediWatch_logo.png';
@@ -214,7 +219,7 @@ export default function Dashboard() {
                     height: 240,
                   }}
                 >
-                  <CurrentConfig/>
+                  <CurrentMemory/>
                 </Paper>
               </Grid>
               {/* Eviction Policies */}

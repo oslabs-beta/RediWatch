@@ -1,3 +1,8 @@
+/**
+ * @module ConfigDropdown
+ * @description dropdown component for selecting cache eviction policy
+ */
+
 import * as React from 'react';
 import { Theme, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -19,7 +24,7 @@ const MenuProps = {
   },
 };
 
-const names = [
+const policies = [
   'noeviction',
   'allkeys-lru',
   'allkeys-lfu',
@@ -30,10 +35,10 @@ const names = [
   'volatile-ttl',
 ];
 
-function getStyles(name: string, personName: readonly string[], theme: Theme) {
+function getStyles(policy: string, evictionPolicy: string, theme: Theme) {
   return {
     fontWeight:
-      personName.indexOf(name) === -1
+      evictionPolicy.indexOf(policy) === -1
         ? theme.typography.fontWeightRegular
         : theme.typography.fontWeightMedium,
   };
@@ -41,16 +46,36 @@ function getStyles(name: string, personName: readonly string[], theme: Theme) {
 
 export default function MultipleSelectChip() {
   const theme = useTheme();
-  const [personName, setPersonName] = React.useState<string[]>([]);
+  const [evictionPolicy, setEvictionPolicy] = React.useState<string>('');
 
-  const handleChange = (event: SelectChangeEvent<typeof personName>) => {
+  const handleChange = (event: SelectChangeEvent<typeof evictionPolicy>) => {
     const {
       target: { value },
     } = event;
-    setPersonName(
+    setEvictionPolicy(
       // On autofill we get a stringified value.
-      typeof value === 'string' ? value.split(',') : value,
+      typeof value === 'string' ? value : 'noeviction',
     );
+
+    alert(value);
+
+    // post request to "update config"
+    // fetch('/api/update-policy', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify(value),
+    // })
+    // .then(res => res.json())
+    // .then(data => {
+    //   console.log('Successfully updated:', data);
+    //   alert('Updated cache configuration');
+    // })
+    // .catch((err) => {
+    //   console.error('Error updating config:', err);
+    //   alert('Failed to update cache configuration');
+    // });
   };
 
   return (
@@ -60,26 +85,23 @@ export default function MultipleSelectChip() {
         <Select
           labelId="demo-multiple-chip-label"
           id="demo-multiple-chip"
-          multiple
-          value={personName}
+          value={evictionPolicy}
           onChange={handleChange}
           input={<OutlinedInput id="select-multiple-chip" label="Eviction Method" />}
           renderValue={(selected) => (
             <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-              {selected.map((value) => (
-                <Chip key={value} label={value} />
-              ))}
+                <Chip key={selected} label={selected} />
             </Box>
           )}
           MenuProps={MenuProps}
         >
-          {names.map((name) => (
+          {policies.map((policy) => (
             <MenuItem
-              key={name}
-              value={name}
-              style={getStyles(name, personName, theme)}
+              key={policy}
+              value={policy}
+              style={getStyles(policy, evictionPolicy, theme)}
             >
-              {name}
+              {policy}
             </MenuItem>
           ))}
         </Select>
