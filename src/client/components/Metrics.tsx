@@ -186,37 +186,37 @@ export default function Dashboard() {
         >
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-            <Grid container spacing={3}>
+            <Grid container spacing={1}>
               {/* Chart */}
-              <Grid item xs={12} md={8} lg={8}>
+              <Grid item xs={12} md={3} lg={5}>
                 <Paper
                   sx={{
                     p: 2,
                     display: 'flex',
                     flexDirection: 'column',
-                    height: 240,
+                   
                   }}
                 >
-                  <iframe src="http://localhost:3000/d-solo/bdop44c6g60hsf/new-dashboard?orgId=1&from=1718331450172&to=1718332350172&panelId=2" width="700" height="200"></iframe>
+                  <iframe src="http://localhost:3000/d-solo/fdsvo9ttg6k8wd/rediwatch?orgId=1&refresh=5s&panelId=4" height="300"></iframe>
                 </Paper>
               </Grid>
               {/* Recent Deposits */}
-              <Grid item xs={12} md={4} lg={4}>
+              <Grid item xs={12} md={9} lg={7}>
                 <Paper
                   sx={{
                     p: 2,
                     display: 'flex',
                     flexDirection: 'column',
-                    height: 240,
+                    
                   }}
                 >
-                  <iframe src="http://localhost:3000/d-solo/bdop44c6g60hsf/new-dashboard?orgId=1&from=1718303258813&to=1718324858813&panelId=1" height="200"></iframe>
+                  <iframe src="http://localhost:3000/d-solo/fdsvo9ttg6k8wd/rediwatch?orgId=1&refresh=5s&panelId=1" height="300"></iframe>
                 </Paper>
               </Grid>
               {/* Recent Orders */}
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  <img src={imgSrc2} />
+                <iframe src="http://localhost:3000/d-solo/fdsvo9ttg6k8wd/rediwatch?orgId=1&refresh=5s&panelId=3" height="300"></iframe>
                 </Paper>
               </Grid>
             </Grid>

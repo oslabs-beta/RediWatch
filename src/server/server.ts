@@ -33,8 +33,8 @@ app.post('/test', async (req: Request, res: Response) => {
         console.log('connected to Redis');
         
         // Set maxmemory to 30mb
-        await redisClient.config('SET', 'maxmemory', '216mb');
-        console.log('maxmemory set to 216mb');
+        await redisClient.config('SET', 'maxmemory', '30mb');
+        console.log('maxmemory set to 30mb');
 
         // Fetch maxmemory configuration
         const configResult = await redisClient.config('GET', 'maxmemory') as Array<string>;
@@ -85,7 +85,7 @@ async function testCachePerformance(redisClient: RedisClientType): Promise<Perfo
     console.log('hits: ', hits);
     console.log('misses: ', misses);
     
-    await redisClient.quit();
+    // await redisClient.quit();
     return { duration, hits, misses };
 }
 
