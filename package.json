@@ -46,7 +46,6 @@
     "webpack": "^5.65.0",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^4.7.2"
-    
   },
   "dependencies": {
     "@emotion/react": "^11.11.4",
@@ -65,6 +64,8 @@
     "redis": "^4.6.15",
     "ts-node": "^10.9.2",
     "tsc": "^2.0.4",
-    "typescript": "^5.5.3"
+    "typescript": "^5.5.3",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.2"
   }
 }
