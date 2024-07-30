@@ -13,86 +13,86 @@ const client = require('./models/queryModels');
 app.use(express.json());
 app.use("/api/users", require("./routes/userRoutes"));
 
-// interface PerformanceMetrics {
-//   duration: number;
-//   hits: number;
-//   misses: number;
-// }
+interface PerformanceMetrics {
+  duration: number;
+  hits: number;
+  misses: number;
+}
 
-// const redisClient: RedisClientType = new Redis({
-//   host: "redis",
-//   port: 6379,
-// });
+const redisClient: RedisClientType = new Redis({
+  host: "redis",
+  port: 6379,
+});
 
-// redisClient.on("error", (err) => console.error("Redis Client Error", err));
-// redisClient.on("connect", () => console.log("Redis client connected"));
+redisClient.on("error", (err) => console.error("Redis Client Error", err));
+redisClient.on("connect", () => console.log("Redis client connected"));
 
-// app.post("/test", async (req: Request, res: Response) => {
-//   try {
-//     // Connect to Redis
-//     await redisClient.ping();
-//     console.log("connected to Redis");
+app.post("/test", async (req: Request, res: Response) => {
+  try {
+    // Connect to Redis
+    await redisClient.ping();
+    console.log("connected to Redis");
 
-//     // Set maxmemory to 30mb
-//     await redisClient.config("SET", "maxmemory", "30mb");
-//     console.log("maxmemory set to 30mb");
+    // Set maxmemory to 30mb
+    await redisClient.config("SET", "maxmemory", "30mb");
+    console.log("maxmemory set to 30mb");
 
-//     // Fetch maxmemory configuration
-//     const configResult = (await redisClient.config(
-//       "GET",
-//       "maxmemory"
-//     )) as Array<string>;
-//     console.log("Config Result: ", configResult);
+    // Fetch maxmemory configuration
+    const configResult = (await redisClient.config(
+      "GET",
+      "maxmemory"
+    )) as Array<string>;
+    console.log("Config Result: ", configResult);
 
-//     // Test cache performance
-//     const performanceMetrics = await testCachePerformance(redisClient);
-//     res.json(performanceMetrics);
-//   } catch (error) {
-//     console.error("Error during Redis operations: ", error);
-//     res.status(500).send("Error during Redis operations");
-//   }
-// });
+    // Test cache performance
+    const performanceMetrics = await testCachePerformance(redisClient);
+    res.json(performanceMetrics);
+  } catch (error) {
+    console.error("Error during Redis operations: ", error);
+    res.status(500).send("Error during Redis operations");
+  }
+});
 
-// app.get("/api/test", async (req: Request, res: Response) => {
-//   res.status(200).json("test");
-// });
+app.get("/api/test", async (req: Request, res: Response) => {
+  res.status(200).json("test");
+});
 
-// async function testCachePerformance(
-//   redisClient: RedisClientType
-// ): Promise<PerformanceMetrics> {
-//   const sampleData = Array.from({ length: 10000 }, (_, i) => `key${i}`);
-//   const ttl = 60 * 60; // 1 hour
+async function testCachePerformance(
+  redisClient: RedisClientType
+): Promise<PerformanceMetrics> {
+  const sampleData = Array.from({ length: 10000 }, (_, i) => `key${i}`);
+  const ttl = 60 * 60; // 1 hour
 
-//   const start = performance.now();
+  const start = performance.now();
 
-//   // Setting keys
-//   for (const key of sampleData) {
-//     await redisClient.set(key, `value${key}`, "EX", ttl);
-//   }
+  // Setting keys
+  for (const key of sampleData) {
+    await redisClient.set(key, `value${key}`, "EX", ttl);
+  }
 
-//   // Retrieve keys
-//   let hits = 0;
-//   let misses = 0;
-//   for (let i = 0; i < 20000; i++) {
-//     const key = `key${Math.floor(Math.random() * 10000)}`;
-//     const result = await redisClient.get(key);
-//     if (result !== null) {
-//       hits++;
-//     } else {
-//       misses++;
-//     }
-//   }
+  // Retrieve keys
+  let hits = 0;
+  let misses = 0;
+  for (let i = 0; i < 20000; i++) {
+    const key = `key${Math.floor(Math.random() * 10000)}`;
+    const result = await redisClient.get(key);
+    if (result !== null) {
+      hits++;
+    } else {
+      misses++;
+    }
+  }
 
-//   const end = performance.now();
-//   const duration = (end - start) / 1000; // converting to seconds
+  const end = performance.now();
+  const duration = (end - start) / 1000; // converting to seconds
 
-//   console.log("Duration: ", duration);
-//   console.log("hits: ", hits);
-//   console.log("misses: ", misses);
+  console.log("Duration: ", duration);
+  console.log("hits: ", hits);
+  console.log("misses: ", misses);
 
-//   // await redisClient.quit();
-//   return { duration, hits, misses };
-// }
+  // await redisClient.quit();
+  return { duration, hits, misses };
+}
 
 interface NewConnectionRequestBody {
   connectionnickname: string;
