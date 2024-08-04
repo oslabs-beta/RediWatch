@@ -1,5 +1,26 @@
 version: "3"
 services:
+  db:
+    image: postgres
+    restart: always
+    container_name: my_postgres_db
+    environment:
+      POSTGRES_USER: nenunvau
+      POSTGRES_PASSWORD: 5sN2jTxq2AbK2OkLRtqJDzfu_I4NFeDG
+      POSTGRES_DB: RediWatch
+    volumes:
+      - db-data:/var/lib/postgresql/data
+      - ./user_database.sql:/docker-entrypoint-initdb.d/user_database.sql
+    networks:
+      - my_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U nenunvau -d RediWatch"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    ports:
+    - "5432:5432"
+
   server:
     image: rediwatch
     container_name: "rediwatch-backend"
@@ -12,6 +33,7 @@ services:
       - redis
     environment: 
       - Redis_Url=redis://redis:6379
+      - DATABASE_URL=postgres://nenunvau:5sN2jTxq2AbK2OkLRtqJDzfu_I4NFeDG@fanny.db.elephantsql.com/nenunvau
     command: npm run dev:server
 
   client:
@@ -31,6 +53,8 @@ services:
     ports: 
       - 6379:6379
     command: redis-server
+    depends_on:
+      - db
 
   grafana:
     image: grafana/grafana:latest
@@ -52,3 +76,8 @@ services:
 volumes:
   node_modules:
   grafana-storage:
+  db-data:
+
+networks:
+  my_network:
+    driver: bridge
