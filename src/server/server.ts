@@ -13,6 +13,32 @@ const client = require('./models/queryModels');
 app.use(express.json());
 app.use("/api/users", require("./routes/userRoutes"));
 
+import { Client } from 'pg';
+
+// Ensure that the environment variable is defined
+const connectionString = process.env.DATABASE_URL;
+if (!connectionString) {
+  throw new Error('DATABASE_URL environment variable is not set');
+}
+
+// Create a new client instance
+const client = new Client({
+  connectionString,
+});
+
+// Connect to the database
+client.connect()
+  .then(() => {
+    console.log('Connected to the database');
+   
+  })
+  .catch((err: Error) => {
+    console.error('Connection error', err.stack);
+
+  });
+
+
+
 interface PerformanceMetrics {
   duration: number;
   hits: number;
