@@ -33,8 +33,11 @@ services:
       - redis
     environment: 
       - Redis_Url=redis://redis:6379
-      - DATABASE_URL=postgres://nenunvau:5sN2jTxq2AbK2OkLRtqJDzfu_I4NFeDG@fanny.db.elephantsql.com/nenunvau
+      - DATABASE_URL
     command: npm run dev:server
+    env_file:
+      - .env
+
 
   client:
     image: rediwatch
