@@ -6,25 +6,25 @@ import { Request, Response } from 'express';
 const signupUser = async (req: Request, res: Response) => {
   console.log('request to signup user', req.body);
   try {
-    const { firstName, lastName, email, password} = req.body;
-    const firstName1 = String(firstName)
-    const lastName1 = String(lastName)
-    const email1 = String(email)
-    const password1 = String(password)
+    const { firstName, lastName, email, password } = req.body;
+    const firstName1 = String(firstName);
+    const lastName1 = String(lastName);
+    const email1 = String(email);
+    const password1 = String(password);
     // check that all fields have been provided
-    if (!firstName1 || ! lastName1||!email1 || !password1) {
-      res.status(400).json({ error: 'Please add all required fields' })
+    if (!firstName1 || !lastName1 || !email1 || !password1) {
+      res.status(400).json({ error: 'Please add all required fields' });
       return;
     }
 
     // check if user already exists
     const text = `SELECT * FROM USERS WHERE EMAIL= $1`;
     const params = [email1];
-    const result = await client.query(text,params);
+    const result = await client.query(text, params);
     // const userExists = result.rows[0];
     // console.log(userExists);
-    if (result.rows.length!==0) {
-      res.status(400).json({ error: 'User already exists'});
+    if (result.rows.length !== 0) {
+      res.status(400).json({ error: 'User already exists' });
       return;
     }
 
@@ -37,25 +37,30 @@ const signupUser = async (req: Request, res: Response) => {
     const textInsert = `INSERT INTO users (firstname, lastname, email, password)
      VALUES ($1,$2,$3,$4)
      RETURNING *`;
-   const paramsInsert = [firstName1, lastName1, email1, hashedPassword];
-   
-   const resultInsert = await client.query(textInsert,paramsInsert);
-   if(resultInsert.rowCount!==1){
-    throw 'Insert new user failed!';
-   }
- 
-   const user = resultInsert.rows[0];
-    if (user) {
-      res.status(201).json({ _id: user.id, firstName: user.firstName, lastName: user.lastName, email: user.email, token: generateToken(user._id) })
-    } else {
-      res.status(400).json({ error: 'Invalid user data'})
+    const paramsInsert = [firstName1, lastName1, email1, hashedPassword];
+
+    const resultInsert = await client.query(textInsert, paramsInsert);
+    if (resultInsert.rowCount !== 1) {
+      throw 'Insert new user failed!';
     }
 
+    const user = resultInsert.rows[0];
+    if (user) {
+      res.status(201).json({
+        _id: user.id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        token: generateToken(user._id),
+      });
+    } else {
+      res.status(400).json({ error: 'Invalid user data' });
+    }
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Internal server error'});
+    res.status(500).json({ error: 'Internal server error' });
   }
-}
+};
 
 const signinUser = async (req: Request, res: Response) => {
   console.log('request to signin user', req.body);
@@ -64,11 +69,12 @@ const signinUser = async (req: Request, res: Response) => {
   try {
     const text = `SELECT * FROM USERS WHERE EMAIL= $1`;
     const params = [email];
-    // console.log(db)
-    const result = await client.query(text,params);
+    console.log('in signin user try block');
+    const result = await client.query(text, params);
+    console.log('RESULT:', result);
     // console.log(result)
-    // console.log(result.rowCount)
-    if (result.rowCount===0) {
+    console.log(result.rowCount);
+    if (result.rowCount === 0) {
       return res.status(400).json({ error: 'User not found' });
     }
     const user = result.rows[0];
@@ -89,12 +95,12 @@ const signinUser = async (req: Request, res: Response) => {
     });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Internal server error' });
+    res.status(500).json({ error: 'signInUser Error' });
   }
 };
 
-const generateToken = (id:number) => {
-  return jwt.sign({ id }, 'abc123', {expiresIn: '30'})
-}
+const generateToken = (id: number) => {
+  return jwt.sign({ id }, 'abc123', { expiresIn: '30' });
+};
 
 module.exports = { signupUser, signinUser };

@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-// import { Client } from 'pg';
+import { Client } from 'pg';
 import { performance } from "perf_hooks";
 import Redis, { Redis as RedisClientType } from "ioredis";
 
@@ -8,10 +8,24 @@ const PORT = 3001;
 
 import "dotenv/config";
 require("dotenv").config();
-const client = require('./models/queryModels');
+
+//import model
+const db = require('./models/queryModels');
 
 app.use(express.json());
 app.use("/api/users", require("./routes/userRoutes"));
+
+
+// Connect to the database
+db.connect()
+  .then(() => {
+    console.log('Connected to the database');
+  })
+  .catch((err: Error) => {
+    console.error('Connection error', err.stack);
+  });
+
+
 
 interface PerformanceMetrics {
   duration: number;
@@ -111,7 +125,7 @@ app.post("/api/add-connection", async (req: Request, res: Response) => {
   }: NewConnectionRequestBody = req.body;
 
   try {
-    const result = await client.query(
+    const result = await db.query(
       "INSERT INTO public.caches (connectionnickname, connectionstring, user_id, config_id) VALUES ($1, $2, $3, $4) RETURNING *",
       [connectionnickname, connectionstring, user_id, config_id]
     );
@@ -122,4 +136,6 @@ app.post("/api/add-connection", async (req: Request, res: Response) => {
   }
 });
 
-app.listen(PORT, () => console.log(`server is listening on port ${PORT}`));
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Server is running on port ${PORT}`);
+});
