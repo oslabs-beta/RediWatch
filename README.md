@@ -40,7 +40,6 @@ Add your Redis connection URL on the homepage, and give it a unique nickname bef
 <img src="./src/assets/Rediwatch-Redis-Cache.png" width="800" alt="redis cache">
 
 Rediwatch will generate the graphs for the performance metrics associated with the selected cache, and you can interact with our dynamic graphs by selecting different eviction policies, ttl times, and maxmemory setting on the Configuration page.
-
 Select the cache configuration settings you would like to visualize, then click the run tests button to update the metrics graphs with the latest cache configuration.
 
 <img src="./src/assets/Rediwatch-Configuration.png" width="800" alt="configuration">

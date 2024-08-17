@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { createRoot } from 'react-dom/client';
 
 // import React components for each route
+import LandingPage from './components/LandingPage';
 import Signin from './components/Signin';
 import Signup from './components/Signup';
 import ConfigurationPage from './components/Configuration';
@@ -19,7 +20,8 @@ const App: React.FC = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Signin />} />
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/Signin" element={<Signin />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/home" element={<Home />} />
         <Route path="/profile" element={<Profile />} />
