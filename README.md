@@ -1,6 +1,6 @@
 # RediWatch
 
-*Website and Dev-tool: [Rediwatch](https://github.com/oslabs-beta/RediWatch)*
+_Website and Dev-tool: [Rediwatch](https://github.com/oslabs-beta/RediWatch)_
 
 ## Overview
 
@@ -15,7 +15,7 @@ Additionally, RediWatch features a configuration testing environment where users
 - Commands processed
 - Connected clients
 - Evicted and expired keys
-- *and many more*
+- _and many more_
 
 ## Core Features
 
@@ -28,14 +28,22 @@ Additionally, RediWatch features a configuration testing environment where users
 ## Getting Started
 
 ### How do you use Rediwatch for applications in production?
-Navigate to [Rediwatch](https://github.com/oslabs-beta/RediWatch) and set up a user account. *Only users with an account can use Rediwatch at this time.*
+
+Navigate to [Rediwatch](https://github.com/oslabs-beta/RediWatch) and set up a user account. _Only users with an account can use Rediwatch at this time._
+
 <img src="./src/assets/Rediwatch-Getting-Started.png" width="800" alt="getting started">
-Go to your Redis cloud console and copy your Redis connection URL from your configuration settings. *Your connection url should include your host, port, and password for Redis.*
+
+Go to your Redis cloud console and copy your Redis connection URL from your configuration settings. _Your connection url should include your host, port, and password for Redis._
+
 Add your Redis connection URL on the homepage, and give it a unique nickname before you add it to your profile. Click submit to generate testing on this cache to display your metrics.
+
 <img src="./src/assets/Rediwatch-Redis-Cache.png" width="800" alt="redis cache">
+
 Rediwatch will generate the graphs for the performance metrics associated with the selected cache, and you can interact with our dynamic graphs by selecting different eviction policies, ttl times, and maxmemory setting on the Configuration page.
 Select the cache configuration settings you would like to visualize, then click the run tests button to update the metrics graphs with the latest cache configuration.
+
 <img src="./src/assets/Rediwatch-Configuration.png" width="800" alt="configuration">
+
 <img src="./src/assets/Rediwatch-Metrics.png" width="800" alt="metrics">
 
 ### How do you use Rediwatch for applications in development?
@@ -43,17 +51,17 @@ Select the cache configuration settings you would like to visualize, then click 
 There are two ways to use the application for development purposes. The first method:
 
 1. First, clone the repository from Github .
-2. Run ```docker build -t rediwatch -f Dockerfile-dev .``` in your terminal
-3. Run ```docker-compose -f docker-compose-dev-hot.yml up``` in your terminal
+2. Run `docker build -t rediwatch -f Dockerfile-dev .` in your terminal
+3. Run `docker-compose -f docker-compose-dev-hot.yml up` in your terminal
 4. Navigate to [localhost:8080](https://localhost:8080). You should see the web application and enter your Redis connection URL (default is empty) and nickname.
 
 Or, simply pull the image from Docker:
 
-1. Navigate to [Docker Hub](https://hub.docker.com) and pull the image using the command ```docker pull rediwatch/rediwatch```
-2. Run ```npm run docker-dev:hot``` in your terminal
+1. Navigate to [Docker Hub](https://hub.docker.com) and pull the image using the command `docker pull rediwatch/rediwatch`
+2. Run `npm run docker-dev:hot` in your terminal
 3. Navigate to [localhost:8080](https://localhost:8080). You should see the web application and enter your Redis connection URL (default is empty) and nickname.
 
-*If you're having any trouble, please refer to the images in the section above.*
+_If you're having any trouble, please refer to the images in the section above._
 
 ## Tech Stack
 
@@ -76,15 +84,17 @@ To ensure consistent deployment across different environments, we containerized 
 ## How to Contribute
 
 1. Clone the repo and make a new branch
-2. Run ```docker build -t rediwatch -f Dockerfile-dev .``` in your terminal
-3. Run ```npm run docker-dev:hot``` in your terminal
+2. Run `docker build -t rediwatch -f Dockerfile-dev .` in your terminal
+3. Run `npm run docker-dev:hot` in your terminal
 4. Add a feature, fix a bug, or refactor some code
 5. Write tests for the changes you made, if necessary
 6. Run unit tests and make sure all tests pass: npm test
 7. Open a Pull Request with a comprehensive description of changes to the dev branch
 
 ## Future Features
+
 There are plenty of features that still need to be integrated into the codebase:
+
 - Jest testing: Adding more unit tests and end-to-end tests for application performance reliability.
 - Alerts and notifications: Set up alerts for individual metrics to be notified when a metric dips below or exceeds a specified value.
 - AuthO: Integrating Google or Github login to quickly and securely access Rediwatch.
