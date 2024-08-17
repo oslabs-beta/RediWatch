@@ -260,7 +260,7 @@ fetch('/api/add-connection', {
                   label="Connection String"
                   variant="outlined"
                   // margin="normal"
-                  helperText="Enter Your Redis Connection String"
+                  helperText="Enter Your Redis Connection String."
                   style={{ width: 400 }}
                 />
                 <br></br>
