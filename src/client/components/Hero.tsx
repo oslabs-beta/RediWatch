@@ -8,7 +8,7 @@ import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 
-import imgSrc from '../../assets/metrics_image.png';
+import imgSrc from '../../assets/Rediwatch-Metrics.png';
 
 export default function Hero() {
   return (
