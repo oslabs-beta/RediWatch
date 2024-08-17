@@ -12,7 +12,7 @@ import ChevronRightRoundedIcon from '@mui/icons-material/ChevronRightRounded';
 import ViewQuiltRoundedIcon from '@mui/icons-material/ViewQuiltRounded';
 import ConstructionRoundedIcon from '@mui/icons-material/ConstructionRounded';
 import ContactsRoundedIcon from '@mui/icons-material/ContactsRounded';
-import metrics_img from '../../assets/metrics.png';
+import metrics_img from '../../assets/Rediwatch-Metrics.png';
 import profile_img from '../../assets/profile.png';
 import config_img from '../../assets/configuration.png';
 
