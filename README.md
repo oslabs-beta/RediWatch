@@ -30,22 +30,14 @@ Additionally, RediWatch features a configuration testing environment where users
 ### How do you use Rediwatch for applications in production?
 
 Navigate to [Rediwatch](https://github.com/oslabs-beta/RediWatch) and set up a user account. *Only users with an account can use Rediwatch at this time.*
-
-getting started
-
+<img src="./src/assets/Rediwatch-Getting-Started.png" width="800" alt="getting started">
 Go to your Redis cloud console and copy your Redis connection URL from your configuration settings. *Your connection url should include your host, port, and password for Redis.*
-
-redis cache
-
 Add your Redis connection URL on the homepage, and give it a unique nickname before you add it to your profile. Click submit to generate testing on this cache to display your metrics.
-
-metrics graph
-
+<img src="./src/assets/Rediwatch-Redis-Cache.png" width="800" alt="redis cache">
 Rediwatch will generate the graphs for the performance metrics associated with the selected cache, and you can interact with our dynamic graphs by selecting different eviction policies, ttl times, and maxmemory setting on the Configuration page.
-
 Select the cache configuration settings you would like to visualize, then click the run tests button to update the metrics graphs with the latest cache configuration.
-
-configuration
+<img src="./src/assets/Rediwatch-Configuration.png" width="800" alt="configuration">
+<img src="./src/assets/Rediwatch-Metrics.png" width="800" alt="metrics">
 
 ### How do you use Rediwatch for applications in development?
 
