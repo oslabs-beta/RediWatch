@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState } from "react";
+import { useState } from 'react';
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import MuiDrawer from '@mui/material/Drawer';
@@ -102,7 +102,7 @@ const darkTheme = createTheme({
     mode: 'dark',
     primary: {
       main: '#C63124',
-    }
+    },
   },
 });
 
@@ -117,57 +117,61 @@ export default function Dashboard() {
   const [nickname, setNickname] = useState<string>('');
 
   //updates the nickname state to user input
-    const handleNicknameInput = (e: React.ChangeEvent<HTMLInputElement>): void => {
-      setNickname(e.target.value);
-
-     
+  const handleNicknameInput = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ): void => {
+    setNickname(e.target.value);
   };
- //updates the connectin string state to user input
-  const handleConnectionStringInput = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    setString(e.target.value);
-};
+  //updates the connection string state to user input
+  const handleConnectionStringInput = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ): void => {
+    if (e.target.value.length >= 1) {
+      setString(e.target.value);
+    }
+  };
 
-//handlesubmit function once form is submitted
+  //handlesubmit function once form is submitted
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-   //grabs connectin string and nickname from state
-   const data = {
-    connectionnickname: nickname,
-    connectionstring: string,
-    //hardcoding the user_id, will eventually need to pull this from the user somehow :-)
-    user_id: 1,
-};
-//post request to "add connection"
-fetch('/api/add-connection', {
-    method: 'POST',
-    headers: {
+    //grabs connectin string and nickname from state
+    const data = {
+      connectionnickname: nickname,
+      connectionstring: string,
+      //hardcoding the user_id, will eventually need to pull this from the user somehow :-)
+      user_id: 1,
+    };
+    //post request to "add connection"
+    fetch('/api/add-connection', {
+      method: 'POST',
+      headers: {
         'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
-})
-.then(response => response.json())
-.then(data => {
-    console.log('Success:', data);
-    alert("Connection Added Successfully");
-})
-.catch((error) => {
-    console.error('Error:', error);
-    alert("Failed to add connection");
-});
-}
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('Success:', data);
+        alert('Connection Added Successfully');
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+        alert('Failed to add connection');
+      });
+  }
 
   return (
     <ThemeProvider theme={darkTheme}>
       <Box
-            component="img"
-            src={imgSrc}
-            alt="RediWatch logo"
-            sx={{
-               position: 'relative',
-               maxWidth: '200px',
-               marginLeft: '18px',
-            }}
-          />
+        component="img"
+        src={imgSrc}
+        alt="RediWatch logo"
+        sx={{
+          position: 'relative',
+          maxWidth: '200px',
+          marginLeft: '18px',
+        }}
+      />
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
         <AppBar position="absolute" open={open}>
@@ -241,42 +245,41 @@ fetch('/api/add-connection', {
             <Box alignItems="center" justifyContent="center">
               Create a New Connection
               <br></br>
-           <form onSubmit={handleSubmit}>
-              <FormGroup>
-                <TextField
-                  id="nick-name"
-               
-                  onInput={handleNicknameInput}
-                  label="Nickname"
-                  variant="outlined"
-                  //margin="normal"
-                  helperText="Create a nickname for this connection"
-                  style={{ width: 400 }}
-                />
-                <br></br>
-                <TextField
-                  id="database-string"
-                 onInput={handleConnectionStringInput}
-                  label="Connection String"
-                  variant="outlined"
-                  // margin="normal"
-                  helperText="Enter Your Redis Connection String."
-                  style={{ width: 400 }}
-                />
-                <br></br>
-                <FormControlLabel
-                  control={<Checkbox defaultChecked />}
-                  label="Save Connection"
-                />
-                <br></br>
-                <Button
-                  type="submit"
-                  variant="contained"
-                  style={{ width: 400 }}
-                >
-                  Submit
-                </Button>
-              </FormGroup>
+              <form onSubmit={handleSubmit}>
+                <FormGroup>
+                  <TextField
+                    id="nick-name"
+                    onInput={handleNicknameInput}
+                    label="Nickname"
+                    variant="outlined"
+                    //margin="normal"
+                    helperText="Create a nickname for this connection"
+                    style={{ width: 400 }}
+                  />
+                  <br></br>
+                  <TextField
+                    id="database-string"
+                    onInput={handleConnectionStringInput}
+                    label="Connection String"
+                    variant="outlined"
+                    // margin="normal"
+                    helperText="Enter Your Redis Connection String."
+                    style={{ width: 400 }}
+                  />
+                  <br></br>
+                  <FormControlLabel
+                    control={<Checkbox defaultChecked />}
+                    label="Save Connection"
+                  />
+                  <br></br>
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    style={{ width: 400 }}
+                  >
+                    Submit
+                  </Button>
+                </FormGroup>
               </form>
             </Box>
           </Container>
