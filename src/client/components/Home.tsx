@@ -120,7 +120,9 @@ export default function Dashboard() {
   const handleNicknameInput = (
     e: React.ChangeEvent<HTMLInputElement>
   ): void => {
-    setNickname(e.target.value);
+    if (e.target.value.length >= 1) {
+      setNickname(e.target.value);
+    }
   };
   //updates the connection string state to user input
   const handleConnectionStringInput = (
